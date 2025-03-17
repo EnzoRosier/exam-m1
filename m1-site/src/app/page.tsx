@@ -1,8 +1,12 @@
 'use client';
 import './App.css';
+import GlobalLayout from '../components/GlobalLayout';
 
 function App() {
-  return <h1>Hello World!</h1>
+  return (
+  <GlobalLayout> {}
+    <h1>Hello World!</h1>
+  </GlobalLayout>)
 }
 
 export default App;
