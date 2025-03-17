@@ -1,11 +1,12 @@
 'use client';
 
 import GlobalLayout from '../../../src/components/GlobalLayout';
+import { Title } from '../../components/Title';
 
 const BookPage = () => {
   return (
     <GlobalLayout>
-        <h1>Yoooo wadduup</h1>
+        <Title>List of Books :</Title>
     </GlobalLayout>
   );
 }

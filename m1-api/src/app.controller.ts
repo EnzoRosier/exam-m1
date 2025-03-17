@@ -15,8 +15,8 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get(':id')
-  public async getID(@Param('id') id: string): Promise<string> {
-    return `ID is ${id}`;
-  }
+  // @Get(':id')
+  // public async getID(@Param('id') id: string): Promise<string> {
+  //   return `ID is ${id}`;
+  // }
 }

@@ -1,11 +1,12 @@
 'use client';
 
 import GlobalLayout from '../../../src/components/GlobalLayout';
+import { Title } from '../../components/Title';
 
 const AuthorPage = () => {
   return (
     <GlobalLayout>
-        <h1>Yoooo wadduupEZEZE</h1>
+        <Title>List of Authors :</Title>
     </GlobalLayout>
   );
 }
