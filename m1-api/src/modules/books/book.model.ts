@@ -5,6 +5,7 @@ export type BookModel = {
   id: string;
   title: string;
   yearPublished: number;
+  price: number;
   author: AuthorModel;
 };
 
@@ -12,6 +13,7 @@ export type BookModel = {
 export type CreateBookModel = {
   title: string;
   yearPublished: number;
+  price: number;
   author: AuthorModel;
 };
 
