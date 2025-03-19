@@ -15,11 +15,16 @@ export class BookRepository {
   private books: BookModel[] = [];
 
   public async getBooks(): Promise<BookModel[]> {
-    return this.books;
+    return this.bookRepository.find({
+      relations : {author : true}
+  });
   }
 
   public async getBookById(id: string): Promise<BookModel | null> {
-    return this.books.find((book) => book.id === id);
+    return this.bookRepository.findOneOrFail({
+      where : {id}, 
+      relations : {author : true}
+  });
   }
 
   public async getBooksByName(name: string): Promise<BookModel[]> {
