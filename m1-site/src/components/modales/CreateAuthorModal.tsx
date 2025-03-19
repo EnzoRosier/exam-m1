@@ -69,7 +69,8 @@ const CreateAuthorModal: FC<Props> = ({ onCreate }) => {
                                 }
                                 placeholder="Last Name"
                             />
-                            <input
+                            <textarea
+                                className="col-span-2 h-20"
                                 value={newAuthor.biography}
                                 onChange={(e) =>
                                     setNewAuthor((prev) => ({

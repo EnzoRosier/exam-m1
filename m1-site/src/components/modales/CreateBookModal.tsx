@@ -74,7 +74,6 @@ const CreateBookModal: FC<Props> = ({ onCreate }) => {
                             />
                             <input
                                 type="number"
-                                value={newBook.yearPublished}
                                 onChange={(e) =>
                                     setNewBook((prev) => ({
                                         ...prev,
@@ -87,7 +86,7 @@ const CreateBookModal: FC<Props> = ({ onCreate }) => {
                                 placeholder="Year of publication"
                             />
                             <input
-                                value={newBook.price}
+                                type="number"
                                 onChange={(e) =>
                                     setNewBook((prev) => ({
                                         ...prev,
