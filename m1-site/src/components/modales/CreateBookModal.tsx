@@ -14,11 +14,18 @@ const CreateBookModal: FC<Props> = ({ onCreate }) => {
         title: "",
         yearPublished: 0,
         authorId: "",
-        price:0
+        price: 0,
     });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        setNewBook({
+            title: "",
+            yearPublished: 0,
+            authorId: "",
+            price: 0,
+        });
+        setShow(false);
         onCreate(newBook);
     };
 
@@ -68,7 +75,7 @@ const CreateBookModal: FC<Props> = ({ onCreate }) => {
                             <input
                                 type="number"
                                 value={newBook.yearPublished}
-                                onChange={(e) => 
+                                onChange={(e) =>
                                     setNewBook((prev) => ({
                                         ...prev,
                                         yearPublished: parseInt(
@@ -80,8 +87,16 @@ const CreateBookModal: FC<Props> = ({ onCreate }) => {
                                 placeholder="Year of publication"
                             />
                             <input
-                                // value={}
-                                // onChange={(e) => setPrice(e.target.value)}
+                                value={newBook.price}
+                                onChange={(e) =>
+                                    setNewBook((prev) => ({
+                                        ...prev,
+                                        price: parseInt(
+                                            e.target.value,
+                                            10
+                                        ),
+                                    }))
+                                }
                                 placeholder="Price"
                             />
                             <select

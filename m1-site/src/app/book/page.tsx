@@ -10,13 +10,15 @@ import { useEffect, useState } from "react";
 
 const BookPage = () => {
     const [books, setBooks] = useState<BookModel[]>([]);
+    const [filteredBooks, setFilteredBooks] = useState<BookModel[]>([]);
+    const [search, setSearch] = useState("");
 
     const onCreate = (input: CreateBookModel) => {
         axios
             .post("http://localhost:3001/books", input)
             .then((result) => {
                 fetchBooks();
-                console.log("AAA",result.data);
+                console.log("AAA", result.data);
             })
             .catch((err) => console.error(err));
     };
@@ -26,6 +28,13 @@ const BookPage = () => {
             .get("http://localhost:3001/books")
             .then((result) => setBooks(result.data))
             .catch((err) => console.error(err));
+    };
+
+    const filterBooks = (books: BookModel[], search: string) => {
+        setSearch(search);
+        setFilteredBooks(books.filter((book) => {
+            return book.title.toLowerCase().includes(search.toLowerCase());
+        }));
     };
 
     useEffect(() => {
@@ -40,7 +49,14 @@ const BookPage = () => {
             </div>
             <br />
             <br />
-            <BookList bookList={[]}></BookList>
+            <input
+                className="text-black mb-2"
+                placeholder="Search Book"
+                type="text"
+                onChange={(e) => filterBooks(books, e.target.value)}
+            ></input>
+            
+            <BookList bookList={ search === "" ? books : filteredBooks }></BookList>
         </GlobalLayout>
     );
 };

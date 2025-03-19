@@ -5,5 +5,12 @@ export type AuthorModel = {
     firstName: string;
     lastName: string;
     biography: string;
-    books?: BookModel[]; // Tableau des IDs des livres de cet auteur
+    books?: BookModel[];
 };
+
+export type CreateAuthorModel = {
+    firstName: string;
+    lastName: string;
+    biography: string; 
+    books?: BookModel[]
+  };
