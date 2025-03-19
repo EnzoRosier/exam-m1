@@ -1,22 +1,18 @@
-// modèle de l'auteur d'un livre
-export type BookAuthorModel = {
-  firstName: string;
-  lastName: string;
-};
+import { AuthorModel } from '../authors/author.model';
 
 // modèle d'un livre
 export type BookModel = {
   id: string;
   title: string;
   yearPublished: number;
-  author: BookAuthorModel;
+  author: AuthorModel;
 };
 
 // modèle pour créer un livre
 export type CreateBookModel = {
   title: string;
   yearPublished: number;
-  author: BookAuthorModel;
+  author: AuthorModel;
 };
 
 // modèle pour mettre à jour un livre

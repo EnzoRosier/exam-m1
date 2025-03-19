@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { BookModel, CreateBookModel, UpdateBookModel } from './book.model';
-import { v4 } from 'uuid';
+import { BookModel, UpdateBookModel } from './book.model';
+import { CreateBookDto } from './book.dto';
+import { BookEntity } from '../database/entities/book.entity';
+import { DataSource } from 'typeorm';
+import { AuthorEntity } from '../database/entities/author.entity';
 
 @Injectable()
 export class BookRepository {
+  private readonly bookRepository = this.dataSource.getRepository(BookEntity)
+  private readonly authorRepository = this.dataSource.getRepository(AuthorEntity)
+
+  constructor(private readonly dataSource : DataSource){};
+
   private books: BookModel[] = [];
 
   public async getBooks(): Promise<BookModel[]> {
@@ -14,10 +22,23 @@ export class BookRepository {
     return this.books.find((book) => book.id === id);
   }
 
-  public async createBook(input: CreateBookModel): Promise<BookModel> {
-    this.books.push({ id: v4(), ...input });
+  public async getBooksByName(name: string): Promise<BookModel[]> {
+    return this.books.filter((book) => book.title.includes(name));
+  }
 
-    return this.books[this.books.length - 1];
+  public async createBook(book: CreateBookDto): Promise<BookModel> {
+           // On va commencer par chercher l'auteur de ce livre dans la DB
+           const author = await this.authorRepository.findOne({where : {id :book.authorId}})
+           // Maintenant on peut créer une nouvelle entrée d'un livre et la sauvegarder
+           const newBook = this.bookRepository.create({
+               title : book.title,
+               yearPublished : book.yearPublished,
+               price : book.price,
+               author : author
+           });
+           const returnedBook = this.bookRepository.save(newBook);
+   
+           return returnedBook;
   }
 
   public async updateBook(
