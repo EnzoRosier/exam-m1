@@ -7,6 +7,7 @@ import CreateBookModal from "../../components/modales/CreateBookModal";
 import { Title } from "../../components/Title";
 import { BookModel, CreateBookModel } from "../../models/BookModel";
 import { useEffect, useState } from "react";
+import { SearchBar } from "../../components/SearchBar";
 
 const BookPage = () => {
     const [books, setBooks] = useState<BookModel[]>([]);
@@ -49,13 +50,7 @@ const BookPage = () => {
             </div>
             <br />
             <br />
-            <input
-                className="text-black mb-2"
-                placeholder="Search Book"
-                type="text"
-                onChange={(e) => filterBooks(books, e.target.value)}
-            ></input>
-            
+            <SearchBar onSearch={(s) => filterBooks(books, s)} search={search} >Search books</SearchBar>
             <BookList bookList={ search === "" ? books : filteredBooks }></BookList>
         </GlobalLayout>
     );

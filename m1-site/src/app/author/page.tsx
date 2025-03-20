@@ -10,9 +10,12 @@ import { useEffect, useState } from "react";
 import { AuthorModel, CreateAuthorModel } from "../../models/AuthorModel";
 import CreateAuthorModal from "../../components/modales/CreateAuthorModal";
 import { AuthorList } from "../../components/AuthorList";
+import { SearchBar } from "../../components/SearchBar";
 
 const AuthorPage = () => {
-    const [author, setAuthor] = useState<AuthorModel[]>([]);
+    const [authors, setAuthors] = useState<AuthorModel[]>([]);
+    const [filteredAuthor, setFilteredAuthor] = useState<AuthorModel[]>([]);
+    const [search, setSearch] = useState("");
 
     const onCreate = (input: CreateAuthorModel) => {
         axios
@@ -27,13 +30,21 @@ const AuthorPage = () => {
     const fetchAuthors = () => {
         axios
             .get("http://localhost:3001/authors")
-            .then((result) => setAuthor(result.data))
+            .then((result) => setAuthors(result.data))
             .catch((err) => console.error(err));
     };
 
     useEffect(() => {
         fetchAuthors();
     }, []);
+
+    const filterAuthor = (authors: AuthorModel[], search: string) => {
+        setSearch(search);
+        setFilteredAuthor(authors.filter((a) => {
+            console.log(a.firstName.toLowerCase() + " " + a.lastName.toLowerCase)
+            return (a.firstName.toLowerCase() + " " + a.lastName.toLowerCase()).includes(search.toLowerCase());
+        }));
+    };
 
     return (
         <GlobalLayout>
@@ -43,7 +54,8 @@ const AuthorPage = () => {
             </div>
             <br />
             <br />
-            <AuthorList authorList={author}></AuthorList>
+            <SearchBar onSearch={(s) => filterAuthor(authors, s)} search={search} >Search authors</SearchBar>
+            <AuthorList authorList={search === "" ?  authors : filteredAuthor}></AuthorList>
         </GlobalLayout>
     );
 };
