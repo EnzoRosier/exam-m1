@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { BookModel, UpdateBookModel } from './book.model';
+import { BookModel } from './book.model';
 import { CreateBookDto, UpdateBookDto } from './book.dto';
 import { BookEntity } from '../database/entities/book.entity';
 import { DataSource } from 'typeorm';
