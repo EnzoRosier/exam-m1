@@ -1,8 +1,5 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BookEntity } from './book.entity';
-
-
-
 @Entity('authors')
 export class AuthorEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')

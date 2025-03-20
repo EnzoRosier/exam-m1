@@ -20,10 +20,12 @@ export class AuthorRepository {
 
   //Trouver un auteur par son ID
   public async findAuthorById(id: string): Promise<AuthorModel | null> {
-    return this.authorRepository.findOne({
+    let auth = await this.authorRepository.findOne({
       where: { id },
       relations: ['books'],
     });
+    console.log(auth);
+    return auth;
   }
 
   // Créer un auteur
