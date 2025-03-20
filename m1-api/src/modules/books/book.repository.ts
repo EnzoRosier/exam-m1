@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { BookModel, UpdateBookModel } from './book.model';
-import { CreateBookDto } from './book.dto';
+import { CreateBookDto, UpdateBookDto } from './book.dto';
 import { BookEntity } from '../database/entities/book.entity';
 import { DataSource } from 'typeorm';
 import { AuthorEntity } from '../database/entities/author.entity';
@@ -46,22 +46,11 @@ export class BookRepository {
            return returnedBook;
   }
 
-  public async updateBook(
-    id: string,
-    input: UpdateBookModel,
-  ): Promise<BookModel | null> {
-    const bookIndex = this.books.findIndex((book) => book.id === id);
+  public async updateBook(id : string, newData : UpdateBookDto):Promise<void> {
+    await this.bookRepository.update(id,newData)
+}
 
-    if (bookIndex === -1) {
-      return null;
-    }
-
-    this.books[bookIndex] = { ...this.books[bookIndex], ...input };
-
-    return this.books[bookIndex];
-  }
-
-  public async deleteBook(id: string): Promise<void> {
-    this.books = this.books.filter((book) => book.id !== id);
+  public async deleteBook(id : string) : Promise<void> {
+    await this.bookRepository.delete(id);
   }
 }

@@ -23,12 +23,9 @@ export class BookController {
       return this.bookService.createBook(input);
     }
   
-    @Patch(':id')
-    public async updateBooks(
-      @Param('id') id: string,
-      @Body() input: UpdateBookDto,
-    ) {
-      return this.bookService.updateBook(id, input);
+    @Patch(":id")
+    public async updateBook(@Param('id') id : string, @Body() data : UpdateBookDto) : Promise<void> {
+        this.bookService.updateBook(id,data);
     }
   
     @Delete(':id')
