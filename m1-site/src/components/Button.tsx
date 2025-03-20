@@ -1,7 +1,7 @@
-import { FC } from "react"
+import React, { FC } from "react"
 
 type Props = {
-    children: string,
+    children: React.ReactNode,
     color?: string
     colorHover?: string
     onClick: () => void
