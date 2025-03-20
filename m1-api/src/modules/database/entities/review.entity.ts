@@ -6,6 +6,9 @@ export class ReviewEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ type: 'varchar' })
+  title: string;
+
   @Column({ type: 'text' })
   comment: string;
 
@@ -13,7 +16,7 @@ export class ReviewEntity {
   rating: number;
 
   @Column({ type: 'date' })
-  date: string;
+  date: Date;
 
   @ManyToOne(() => BookEntity, (book) => book.reviews, { nullable: false })
   @JoinColumn({ name: 'book_id' })
