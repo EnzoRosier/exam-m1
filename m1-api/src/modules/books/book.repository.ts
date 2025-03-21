@@ -16,14 +16,15 @@ export class BookRepository {
 
   public async getBooks(): Promise<BookModel[]> {
     return this.bookRepository.find({
-      relations : {author : true}
+      relations : {author : true, reviews : true}
+      
   });
   }
 
   public async getBookById(id: string): Promise<BookModel | null> {
     return this.bookRepository.findOneOrFail({
       where : {id}, 
-      relations : {author : true}
+      relations : {author : true, reviews : true}
   });
   }
 
