@@ -15,10 +15,6 @@ export class BookService {
         return this.bookRepository.getBookById(id);
     }
 
-    public async getBooksByName(name : string):Promise<BookModel[]> {
-        return this.bookRepository.getBooksByName(name);
-    }
-
     public createBook(book : CreateBookDto):Promise<BookModel> {
         return this.bookRepository.createBook(book);
     }

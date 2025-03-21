@@ -5,7 +5,13 @@ export class AuthorPresenter {
   firstName: string;
   lastName: string;
   biography: string;
-  books: { id: string; title: string; yearPublished: number; price: number }[];
+  books: {
+    id: string;
+    title: string;
+    yearPublished: number;
+    price: number;
+    reviews: { comment: string; rating: number }[];
+  }[];
 
   private constructor(author: AuthorPresenter) {
     Object.assign(this, author);
@@ -21,7 +27,11 @@ export class AuthorPresenter {
         id: book.id,
         title: book.title,
         yearPublished: book.yearPublished,
-        price: book.price
+        price: book.price,
+        reviews: book.reviews?.map((review) => ({
+          comment: review.comment,
+          rating: review.rating
+        })) || [] // S'assure que reviews est toujours un tableau
       })) || [] // S'assure que books est toujours un tableau
     });
   }

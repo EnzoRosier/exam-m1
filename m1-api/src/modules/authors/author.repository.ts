@@ -14,7 +14,7 @@ export class AuthorRepository {
   // Liste des auteurs
   public async listAuthors(): Promise<AuthorModel[]> {
     return this.authorRepository.find({
-      relations: ['books'], // On liste les livres associés lorsque l'on liste les auteurs
+      relations: ['books', 'books.reviews'], // On liste les livres associés lorsque l'on liste les auteurs
     });
   }
 
@@ -22,7 +22,7 @@ export class AuthorRepository {
   public async findAuthorById(id: string): Promise<AuthorModel | null> {
     let auth = await this.authorRepository.findOne({
       where: { id },
-      relations: ['books'],
+      relations: ['books', 'books.reviews'], // Include reviews of the books
     });
     console.log(auth);
     return auth;
@@ -60,7 +60,7 @@ export class AuthorRepository {
   }
 
   public async save(author: AuthorModel): Promise<AuthorModel> {
-    return this.authorRepository.save(author);  // Utilise le repository pour sauvegarder ou mettre à jour l'auteur
+    return this.authorRepository.save(author); 
   }
   
   //Retourne les livres d'un auteur

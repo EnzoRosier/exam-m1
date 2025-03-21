@@ -4,7 +4,7 @@ export type AuthorModel = {
   firstName: string;
   lastName: string;
   biography: string; 
-  books?: BookEntity[]; // Tableau des IDs des livres de cet auteur
+  books?: BookEntity[]; // Tableau des livres de cet auteur
   };
   
   export type CreateAuthorModel = {
