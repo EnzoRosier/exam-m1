@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BookEntity } from './book.entity';
+import { on } from 'events';
 @Entity('authors')
 export class AuthorEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -14,6 +15,6 @@ export class AuthorEntity extends BaseEntity {
   @Column({name:' biography', type: 'varchar'})
   biography: string; 
   
-  @OneToMany(() => BookEntity, (book) => book.author, { nullable: true },)
+  @OneToMany(() => BookEntity, (book) => book.author, { nullable: true, onDelete: 'SET NULL' })
   books: BookEntity[];
 }
