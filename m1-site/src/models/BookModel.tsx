@@ -1,4 +1,5 @@
 import { AuthorModel } from "./AuthorModel";
+import { ReviewModel } from "./ReviewModel";
 
 export type BookModel = {
     id: string;
@@ -6,6 +7,7 @@ export type BookModel = {
     yearPublished: number;
     author: AuthorModel;
     price: number;
+    reviews: ReviewModel[];
 };
 
 export type CreateBookModel = {

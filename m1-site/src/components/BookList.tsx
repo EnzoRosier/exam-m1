@@ -13,7 +13,7 @@ export const BookList: FC<Props> = ({ bookList }) => {
         console.log("BookList", bookList);
     }, [bookList]);
 
-    const openBookDetails = (bookId : string) => {
+    const openBookDetails = (bookId: string) => {
         router.push(`/book/${bookId}`);
     };
 
@@ -31,18 +31,14 @@ export const BookList: FC<Props> = ({ bookList }) => {
                     <br />
                     <span>
                         by{" "}
-                        {book.author != null
-                            ? book.author.firstName
-                            : "Loading..."}
-                        ,{" "}
-                        {book.author != null
-                            ? book.author.lastName
-                            : "Loading..."}
+                        {book.author != null || book.author != null
+                            ? book.author.firstName + " " + book.author.lastName
+                            : "Unknown"}
                         <br />
                         published in : {book.yearPublished}
                     </span>
                     <br />
-                    <span>Rating : 69/5</span>
+                    <span>Rating : {book.reviews.length != 0 ?  book.reviews.reduce((sum, review) => sum + review.rating, 0) / book.reviews.length : "?"}/5</span>
                 </li>
             ))}
         </ul>

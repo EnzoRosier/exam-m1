@@ -21,7 +21,7 @@ export const BookDetails = () => {
             .get(`http://localhost:3001/books/${id}`)
             .then((result) => setBook(result.data))
             .catch((err) => console.error(err));
-        fetchReviews()
+        fetchReviews();
     }, [id]);
 
     const fetchReviews = () => {
@@ -58,15 +58,25 @@ export const BookDetails = () => {
                     <Title>{book.title + " details"}</Title>
                     <br />
                     <span>
-                        By{" "}
-                        <span
-                            className="underline text-blue-700 cursor-pointer"
-                            onClick={() =>
-                                router.push(`/author/${book.author.id}`)
-                            }
-                        >
-                            {book.author.firstName} {book.author.lastName}
-                        </span>
+                        {book.author == null ? (
+                            <span>The author of this book is unknown</span>
+                        ) : (
+                            <>
+                                <span>By </span>
+                                <span
+                                    className="underline text-blue-700 cursor-pointer"
+                                    onClick={() =>
+                                        router.push(`/author/${book.author.id}`)
+                                    }
+                                >
+                                    {book.author == null
+                                        ? "Unknown"
+                                        : book.author.firstName +
+                                          " " +
+                                          book.author.lastName}
+                                </span>
+                            </>
+                        )}
                     </span>
                     <br />
                     <span>Published in : {book.yearPublished}</span>
