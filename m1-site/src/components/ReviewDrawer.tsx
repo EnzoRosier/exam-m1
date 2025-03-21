@@ -1,7 +1,21 @@
-import { useState } from "react";
+import { FC, useState } from "react";
+import { ReviewList } from "./ReviewList";
+import { CreateReviewModel, ReviewModel } from "../models/ReviewModel";
+import { Button } from "./Button";
+import { AddReviewModal } from "./modales/AddReviewModal";
+import { BookModel } from "../models/BookModel";
 
-export const ReviewDrawer = () => {
+type Props = {
+    reviewList: ReviewModel[];
+    book: BookModel;
+    onAddReview: (newReview:CreateReviewModel) => void;
+};
+
+export const ReviewDrawer: FC<Props> = ({ reviewList, book, onAddReview }) => {
     const [show, setShow] = useState(false);
+    const [showAdd, setShowAdd] = useState(false)
+
+    
 
     return (
         <div>
@@ -16,7 +30,16 @@ export const ReviewDrawer = () => {
                     show ? "translate-y-0" : "translate-y-full"
                 }`}
             >
-                This is a review
+                <ReviewList reviewList={reviewList} />
+                <Button onClick={() => setShowAdd(true)}>
+                    Add Review
+                </Button>
+                <AddReviewModal
+                    onSubmit={(r) => onAddReview(r)}
+                    hide={() => setShowAdd(false)}
+                    show={showAdd}
+                    book={book}
+                >Add Review</AddReviewModal>
             </div>
         </div>
     );

@@ -7,10 +7,12 @@ import { ReviewDrawer } from "./ReviewDrawer";
 import Modal from "./modales/Modal";
 import { Button } from "./Button";
 import { RemoveModal } from "./modales/RemoveModal";
+import { CreateReviewModel } from "../models/ReviewModel";
 
 export const BookDetails = () => {
     const [showSupprModal, setShowSupprModal] = useState(false);
     const [book, setBook] = useState<BookModel | null>(null);
+    const [reviewList, setReviewList] = useState([]);
     const { id } = useParams();
     const router = useRouter();
 
@@ -19,13 +21,30 @@ export const BookDetails = () => {
             .get(`http://localhost:3001/books/${id}`)
             .then((result) => setBook(result.data))
             .catch((err) => console.error(err));
+        fetchReviews()
     }, [id]);
+
+    const fetchReviews = () => {
+        axios
+            .get(`http://localhost:3001/reviews/${id}`)
+            .then((result) => setReviewList(result.data))
+            .catch((err) => console.error(err));
+    };
 
     const onSuppr = () => {
         axios
             .delete(`http://localhost:3001/books/${id}`)
             .then((result) => {
                 router.push("/book");
+            })
+            .catch((err) => console.error(err));
+    };
+
+    const onAddReview = (newReview: CreateReviewModel) => {
+        axios
+            .post(`http://localhost:3001/reviews/${id}`, newReview)
+            .then((result) => {
+                fetchReviews();
             })
             .catch((err) => console.error(err));
     };
@@ -39,14 +58,26 @@ export const BookDetails = () => {
                     <Title>{book.title + " details"}</Title>
                     <br />
                     <span>
-                        By <span className="underline text-blue-700 cursor-pointer" onClick={() => router.push(`/author/${book.author.id}`)}>{book.author.firstName} {book.author.lastName}</span>
+                        By{" "}
+                        <span
+                            className="underline text-blue-700 cursor-pointer"
+                            onClick={() =>
+                                router.push(`/author/${book.author.id}`)
+                            }
+                        >
+                            {book.author.firstName} {book.author.lastName}
+                        </span>
                     </span>
                     <br />
                     <span>Published in : {book.yearPublished}</span>
                     <br />
                     <span>{book.price}€</span>
                     <br />
-                    <Button onClick={() => setShowSupprModal(true)} color="bg-red-600" colorHover="bg-red-700">
+                    <Button
+                        onClick={() => setShowSupprModal(true)}
+                        color="bg-red-600"
+                        colorHover="bg-red-700"
+                    >
                         Remove this book
                     </Button>
                     <RemoveModal
@@ -57,7 +88,11 @@ export const BookDetails = () => {
                         Are you sure you want to delete this book from the
                         library ?
                     </RemoveModal>
-                    <ReviewDrawer></ReviewDrawer>
+                    <ReviewDrawer
+                        reviewList={reviewList}
+                        book={book}
+                        onAddReview={(r) => onAddReview(r)}
+                    ></ReviewDrawer>
                 </>
             )}
         </div>
