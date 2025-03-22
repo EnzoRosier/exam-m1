@@ -9,6 +9,7 @@ import { BookModel, CreateBookModel } from "../../models/BookModel";
 import { useEffect, useState } from "react";
 import { SearchBar } from "../../components/SearchBar";
 import { Sorter } from "../../components/Sorter";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
 
 const BookPage = () => {
     const [books, setBooks] = useState<BookModel[]>([]);
@@ -70,6 +71,7 @@ const BookPage = () => {
 
     return (
         <GlobalLayout>
+            <Breadcrumbs tree={[]} curr={"Book list page"} />
             <div className="grid grid-cols-2">
                 <Title>List of Books :</Title>
                 <CreateBookModal onCreate={onCreate}></CreateBookModal>
