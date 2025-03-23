@@ -13,6 +13,7 @@ import { AuthorList } from "../../components/AuthorList";
 import { SearchBar } from "../../components/SearchBar";
 import { Sorter } from "../../components/Sorter";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
+import { Button } from "../../components/Button";
 
 const AuthorPage = () => {
     const [authors, setAuthors] = useState<AuthorModel[]>([]);
@@ -20,6 +21,7 @@ const AuthorPage = () => {
     const [search, setSearch] = useState("");
     const sortTypes = ["asc", "desc"];
     const [sort, setSort] = useState("asc");
+    const [showModal, setShowModal] = useState(false)
 
     const onCreate = (input: CreateAuthorModel) => {
         axios
@@ -98,7 +100,7 @@ const AuthorPage = () => {
             <Breadcrumbs tree={[]} curr={"Author list page"} />
             <div className="grid grid-cols-2">
                 <Title>List of Authors :</Title>
-                <CreateAuthorModal onCreate={onCreate}></CreateAuthorModal>
+                <Button color="bg-green-500" colorHover="bg-green-700" onClick={() => setShowModal(true)}>Add author</Button>
             </div>
             <br />
             <br />
@@ -113,9 +115,11 @@ const AuthorPage = () => {
                 sortTypes={sortTypes}
                 setSort={(s) => sortListAuthor(s)}
             ></Sorter>
+            
             <AuthorList
                 authorList={search === "" ? authors : filteredAuthor}
             ></AuthorList>
+            <CreateAuthorModal onSubmit={(e) => onCreate(e)} hide={() => setShowModal(false)} show={showModal}></CreateAuthorModal>
         </GlobalLayout>
     );
 };

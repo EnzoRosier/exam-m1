@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { SearchBar } from "../../components/SearchBar";
 import { Sorter } from "../../components/Sorter";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
+import { Button } from "../../components/Button";
 
 const BookPage = () => {
     const [books, setBooks] = useState<BookModel[]>([]);
@@ -17,6 +18,7 @@ const BookPage = () => {
     const [search, setSearch] = useState("");
     const sortTypes = ["asc", "desc"];
     const [sort, setSort] = useState("asc");
+    const [showModal, setShowModal] = useState(false)
 
     const onCreate = (input: CreateBookModel) => {
         axios
@@ -74,7 +76,7 @@ const BookPage = () => {
             <Breadcrumbs tree={[]} curr={"Book list page"} />
             <div className="grid grid-cols-2">
                 <Title>List of Books :</Title>
-                <CreateBookModal onCreate={onCreate}></CreateBookModal>
+                <Button color="bg-green-500" colorHover="bg-green-700" onClick={() => setShowModal(true)}>Add book</Button>
             </div>
             <br />
             <br />
@@ -94,6 +96,7 @@ const BookPage = () => {
             <BookList
                 bookList={search === "" ? books : filteredBooks}
             ></BookList>
+            <CreateBookModal onSubmit={(e) => onCreate(e)} hide={() => setShowModal(false)} show={showModal}></CreateBookModal>
         </GlobalLayout>
     );
 };
