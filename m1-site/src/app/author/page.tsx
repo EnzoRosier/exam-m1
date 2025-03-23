@@ -21,7 +21,7 @@ const AuthorPage = () => {
     const [search, setSearch] = useState("");
     const sortTypes = ["asc", "desc"];
     const [sort, setSort] = useState("asc");
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(false);
 
     const onCreate = (input: CreateAuthorModel) => {
         axios
@@ -100,26 +100,37 @@ const AuthorPage = () => {
             <Breadcrumbs tree={[]} curr={"Author list page"} />
             <div className="grid grid-cols-2">
                 <Title>List of Authors :</Title>
-                <Button color="bg-green-500" colorHover="bg-green-700" onClick={() => setShowModal(true)}>Add author</Button>
+                <Button
+                    color="bg-green-500"
+                    colorHover="bg-green-700"
+                    onClick={() => setShowModal(true)}
+                >
+                    Add author
+                </Button>
             </div>
             <br />
             <br />
-            <SearchBar
-                onSearch={(s) => filterAuthor(authors, s)}
-                search={search}
-            >
-                Search authors
-            </SearchBar>
-            <Sorter
-                sort={sort}
-                sortTypes={sortTypes}
-                setSort={(s) => sortListAuthor(s)}
-            ></Sorter>
-            
+            <div className="grid grid-cols-2 w-1/2 space-x-2 mb-2">
+                <SearchBar
+                    onSearch={(s) => filterAuthor(authors, s)}
+                    search={search}
+                >
+                    Search authors
+                </SearchBar>
+                <Sorter
+                    sort={sort}
+                    sortTypes={sortTypes}
+                    setSort={(s) => sortListAuthor(s)}
+                ></Sorter>
+            </div>
             <AuthorList
                 authorList={search === "" ? authors : filteredAuthor}
             ></AuthorList>
-            <CreateAuthorModal onSubmit={(e) => onCreate(e)} hide={() => setShowModal(false)} show={showModal}></CreateAuthorModal>
+            <CreateAuthorModal
+                onSubmit={(e) => onCreate(e)}
+                hide={() => setShowModal(false)}
+                show={showModal}
+            ></CreateAuthorModal>
         </GlobalLayout>
     );
 };

@@ -67,19 +67,18 @@ export const AuthorDetails = () => {
                 <>
                     <Breadcrumbs tree={[{name:"Author list page", link:"/author"}]} curr={author.firstName + " " + author.lastName} />
                     <Title>
-                        {author.firstName + " " + author.lastName + " details"}
+                        {author.firstName + " " + author.lastName + "'s details"}
                     </Title>
                     <br />
-                    <span>{author.biography}</span>
-                    <br />
-                    <span>
+                    <p>Biography : {author.biography}</p>
+                    <p>
                         {author.books == null ||
                         author.books?.length === 0 ||
                         author.books?.filter((book) => book.reviews.length >= 0)
                             .length === 0
                             ? "No book or reviews found "
                             : "Average ratings : " +
-                              author.books.reduce(
+                              author.books.filter((b) => b.reviews.length !== 0).reduce(
                                   (sum1, book) =>
                                       sum1 +
                                       book.reviews.reduce(
@@ -89,24 +88,25 @@ export const AuthorDetails = () => {
                                           book.reviews.length,
                                   0
                               ) /
-                                  author.books.length}
-                    </span>
+                                  author.books.filter((b) => b.reviews.length !== 0).length}
+                    </p>
                     <EditAuthorBook
                         author={author}
                         onChange={(a, idBook) => onChangeBook(a, idBook)}
                     ></EditAuthorBook>
                     <br />
+                    <br />
                     <Button
                         onClick={() => setShowSupprModal(true)}
-                        color="bg-red-600"
-                        colorHover="bg-red-700"
+                        color="bg-red-500 mr-4"
+                        colorHover="bg-red-600"
                     >
                         Remove this author
                     </Button>
                     <Button
                         onClick={() => setShowEditModal(true)}
-                        color="bg-green-600"
-                        colorHover="bg-green-700"
+                        color="bg-green-500"
+                        colorHover="bg-green-600"
                     >
                         Edit this author
                     </Button>
