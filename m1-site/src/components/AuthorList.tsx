@@ -7,13 +7,12 @@ type Props = {
     authorList: AuthorModel[];
 };
 
+//Show list of all the author in db
 export const AuthorList: FC<Props> = ({ authorList }) => {
     const router = useRouter();
-    useEffect(() => {
-        console.log("authorList", authorList);
-    }, [authorList]);
 
     return authorList.length === 0 ? (
+        //if no authors
         <div>No authors to display</div>
     ) : (
         <ul className="space-y-2">

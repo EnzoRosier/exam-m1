@@ -15,6 +15,7 @@ import { Sorter } from "../../components/Sorter";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { Button } from "../../components/Button";
 
+//Page with author list
 const AuthorPage = () => {
     const [authors, setAuthors] = useState<AuthorModel[]>([]);
     const [filteredAuthor, setFilteredAuthor] = useState<AuthorModel[]>([]);
@@ -23,6 +24,7 @@ const AuthorPage = () => {
     const [sort, setSort] = useState("asc");
     const [showModal, setShowModal] = useState(false);
 
+    //request to add an author
     const onCreate = (input: CreateAuthorModel) => {
         axios
             .post("http://localhost:3001/authors", input)
@@ -33,6 +35,7 @@ const AuthorPage = () => {
             .catch((err) => console.error(err));
     };
 
+    //request to get all authors
     const fetchAuthors = () => {
         axios
             .get("http://localhost:3001/authors")
@@ -40,10 +43,12 @@ const AuthorPage = () => {
             .catch((err) => console.error(err));
     };
 
+    //fetch autor at load
     useEffect(() => {
         fetchAuthors();
     }, []);
 
+    //Filter author based on search string
     const filterAuthor = (authors: AuthorModel[], search: string) => {
         setSearch(search);
         setFilteredAuthor(
@@ -60,6 +65,7 @@ const AuthorPage = () => {
         );
     };
 
+    //Sort list of shown auhtor
     const sortListAuthor = (sort: string) => {
         setSort(sort);
         if (sort === "asc") {
@@ -69,14 +75,14 @@ const AuthorPage = () => {
                         b.firstName + b.lastName
                     )
                 )
-            );
+            ); //sort unfiltered
             setFilteredAuthor(
                 [...filteredAuthor].sort((a, b) =>
                     (a.firstName + a.lastName).localeCompare(
                         b.firstName + b.lastName
                     )
                 )
-            );
+            ); //sort filtered
         } else {
             setAuthors(
                 [...authors].sort((a, b) =>
@@ -84,14 +90,14 @@ const AuthorPage = () => {
                         a.firstName + a.lastName
                     )
                 )
-            );
+            ); //sort unfiltered
             setFilteredAuthor(
                 [...filteredAuthor].sort((a, b) =>
                     (b.firstName + b.lastName).localeCompare(
                         a.firstName + a.lastName
                     )
                 )
-            );
+            ); //sort filtered
         }
     };
 

@@ -11,16 +11,19 @@ type Props = {
     onChange: (book: EditBookModel, idBook: string) => void;
 };
 
+// Interface to edit the books of an author
 export const EditAuthorBook: FC<Props> = ({ author, onChange }) => {
-    const [editedAuthor, setEditedAuthor] = useState(author);
-    const [freeBook, setFreeBook] = useState<BookModel[]>([]);
-    const [selectedBook, setSelectedBook] = useState<BookModel | null>();
+    const [editedAuthor, setEditedAuthor] = useState(author); //Current author
+    const [freeBook, setFreeBook] = useState<BookModel[]>([]); //Books without author
+    const [selectedBook, setSelectedBook] = useState<BookModel | null>(); //current selected book
     const router = useRouter();
 
+    // Fetch books at start
     useEffect(() => {
         fetchBooks();
     }, []);
 
+    // Request to fetch books without an author
     const fetchBooks = () => {
         axios
             .get(`http://localhost:3001/books/`)
@@ -32,11 +35,13 @@ export const EditAuthorBook: FC<Props> = ({ author, onChange }) => {
             .catch((err) => console.error(err));
     };
 
+    //Request to remove a book from an author
     const removeBook = (book: BookModel, idBook: string) => {
         onChange({ author: { id: null } }, idBook);
         setFreeBook(freeBook.concat(book));
     };
 
+    //Request to add a book to an author
     const addBook = () => {
         if (selectedBook != null) {
             onChange({ author: { id: editedAuthor.id } }, selectedBook.id);

@@ -7,13 +7,14 @@ import { Button } from "../Button";
 import { CreateReviewModel, ReviewModel } from "../../models/ReviewModel";
 
 type Props = {
-    onSubmit: (newReview:CreateReviewModel) => void;
-    hide: () => void;
-    show: boolean;
+    onSubmit: (newReview:CreateReviewModel) => void; //function that send the new review to the db
+    hide: () => void; //function that hides the modal
+    show: boolean; //function that tells if the modal must be shown
     children: string;
-    book: BookModel;
+    book: BookModel; //Curent book to add the review to
 };
 
+//modal to add a review
 export const AddReviewModal: FC<Props> = ({
     onSubmit,
     hide,
@@ -29,6 +30,7 @@ export const AddReviewModal: FC<Props> = ({
         date: new Date(Date.now())
     });
 
+    //Submit new review
     const handleSubmit = () => {
         hide();
         onSubmit(newReview);
@@ -43,6 +45,7 @@ export const AddReviewModal: FC<Props> = ({
                     className="grid grid-cols-2 gap-4 text-black"
                     onSubmit={handleSubmit}
                 >
+                    {/* title input */}
                     <input
                         value={newReview.title}
                         onChange={(e) =>
@@ -53,6 +56,7 @@ export const AddReviewModal: FC<Props> = ({
                         }
                         placeholder="Review title"
                     />
+                    {/* rating input */}
                     <input
                         type="number"
                         min="1"
@@ -65,6 +69,7 @@ export const AddReviewModal: FC<Props> = ({
                             }))
                         }
                     />
+                    {/* comment input */}
                     <textarea
                         className="col-span-2 h-20"
                         value={newReview.comment}
@@ -76,6 +81,7 @@ export const AddReviewModal: FC<Props> = ({
                         }
                         placeholder="Biography"
                     />
+                    {/* cancel input */}
                     <Button
                         onClick={() => hide()}
                         color="bg-blue-600"
@@ -83,6 +89,7 @@ export const AddReviewModal: FC<Props> = ({
                     >
                         Cancel
                     </Button>
+                    {/* submit input */}
                     <Button
                         onClick={() => handleSubmit()}
                         color="bg-red-600"

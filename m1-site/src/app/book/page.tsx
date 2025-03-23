@@ -12,6 +12,7 @@ import { Sorter } from "../../components/Sorter";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { Button } from "../../components/Button";
 
+//page with list of books
 const BookPage = () => {
     const [books, setBooks] = useState<BookModel[]>([]);
     const [filteredBooks, setFilteredBooks] = useState<BookModel[]>([]);
@@ -20,6 +21,7 @@ const BookPage = () => {
     const [sort, setSort] = useState("asc");
     const [showModal, setShowModal] = useState(false)
 
+    //Request to create a books
     const onCreate = (input: CreateBookModel) => {
         axios
             .post("http://localhost:3001/books", input)
@@ -30,6 +32,7 @@ const BookPage = () => {
             .catch((err) => console.error(err));
     };
 
+    //REquest to get all books in db
     const fetchBooks = () => {
         axios
             .get("http://localhost:3001/books")
@@ -37,6 +40,7 @@ const BookPage = () => {
             .catch((err) => console.error(err));
     };
 
+    //Request to filter shown books based on search string 
     const filterBooks = (books: BookModel[], search: string) => {
         setSearch(search);
         setFilteredBooks(
@@ -46,27 +50,27 @@ const BookPage = () => {
         );
     };
 
+    //request to sort shown books
     const sortListBook = (sort: string) => {
         setSort(sort);
-        console.log("sort", filterBooks);
         if (sort === "asc") {
-            setBooks([...books].sort((a, b) => a.title.localeCompare(b.title)));
+            setBooks([...books].sort((a, b) => a.title.localeCompare(b.title))); //sort books
             setFilteredBooks(
                 [...filteredBooks].sort((a, b) =>
                     a.title.localeCompare(b.title)
                 )
-            );
+            ); //sort filtered
         } else {
-            setBooks([...books].sort((a, b) => b.title.localeCompare(a.title)));
+            setBooks([...books].sort((a, b) => b.title.localeCompare(a.title))); //sort books
             setFilteredBooks(
                 [...filteredBooks].sort((a, b) =>
                     b.title.localeCompare(a.title)
                 )
-            );
+            ); //sort filtered
         }
-        console.log("sort", filteredBooks);
     };
 
+    //Fetch books at load
     useEffect(() => {
         fetchBooks();
     }, []);

@@ -7,22 +7,24 @@ import { BookModel } from "../models/BookModel";
 import { Sorter } from "./Sorter";
 
 type Props = {
-    reviewList: ReviewModel[];
-    book: BookModel;
-    onAddReview: (newReview: CreateReviewModel) => void;
+    reviewList: ReviewModel[]; //List of reviews
+    book: BookModel; //Current book
+    onAddReview: (newReview: CreateReviewModel) => void; //to add a review to a book
 };
 
+//Show a drawer containing reviews of a book
 export const ReviewDrawer: FC<Props> = ({ reviewList, book, onAddReview }) => {
-    const [show, setShow] = useState(false);
-    const [showAdd, setShowAdd] = useState(false);
-    const sortTypes = ["asc", "desc"];
-    const [sort, setSort] = useState("asc");
-    const [reviews, setReviews] = useState(reviewList)
-
+    const [show, setShow] = useState(false); //indicates if visible
+    const [showAdd, setShowAdd] = useState(false); //idicates if add modal should be visible
+    const sortTypes = ["asc", "desc"]; //Types of sort
+    const [sort, setSort] = useState("asc"); //curent sort
+    const [reviews, setReviews] = useState(reviewList) //list of reviews
+    
     useEffect(() => (
         setReviews(reviewList)
     ), [reviewList])
 
+    //Sort reviews
     const sortListReview = (sort: string) => {
         setSort(sort);
         if (sort === "asc") {

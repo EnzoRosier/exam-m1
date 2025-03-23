@@ -1,16 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import "./GlobalLayout.css";
-import { BookModel } from "../models/BookModel";
-import { useRouter } from "next/navigation";
 import { ReviewModel } from "../models/ReviewModel";
-import { Button } from "./Button";
-import { AddReviewModal } from "./modales/AddReviewModal";
-import { SearchBar } from "./SearchBar";
 
 type Props = {
     reviewList: ReviewModel[];
 };
 
+//Show the list of review
 export const ReviewList: FC<Props> = ({ reviewList }) => {
     return reviewList.length === 0 ? (
         <div>No reviews for this book</div>

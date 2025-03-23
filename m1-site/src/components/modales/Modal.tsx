@@ -4,16 +4,19 @@ import { AuthorModel } from "../../models/AuthorModel";
 import axios from "axios";
 
 type Props = {
-    children: React.ReactNode;
-    show: boolean;
-    hide: () => void;
+    children: React.ReactNode; //inside of modal
+    show: boolean; //indicates if modal shown or not
+    hide: () => void; //hides the modal
 };
 
-const CreateBookModal: FC<Props> = ({ show, children, hide }) => {
+//Base for all modal
+const Modal: FC<Props> = ({ show, children, hide }) => {
 
     return (
         <div>
+            {/* if modal must be shown */}
             {show && (
+                // background
                 <div
                     onClick={() => hide()}
                     className="z-1 absolute top-0 left-0 w-full h-full bg-stone-900 bg-opacity-50"
@@ -30,4 +33,4 @@ const CreateBookModal: FC<Props> = ({ show, children, hide }) => {
     );
 };
 
-export default CreateBookModal;
+export default Modal;

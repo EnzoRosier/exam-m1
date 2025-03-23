@@ -6,11 +6,12 @@ import Modal from "./Modal";
 import { Button } from "../Button";
 
 type Props = {
-    onSubmit: (newAuthor: CreateAuthorModel) => void;
-    hide: () => void;
-    show: boolean;
+    onSubmit: (newAuthor: CreateAuthorModel) => void; //Function that sends the request to create the author
+    hide: () => void; //Function that hides the modal
+    show: boolean; //tells if the modal is visible or not
 };
 
+//Modal to create a new author
 const CreateAuthorModal: FC<Props> = ({ onSubmit, hide, show }) => {
     const [newAuthor, setNewAuthor] = useState<CreateAuthorModel>({
         lastName: "",
@@ -18,6 +19,7 @@ const CreateAuthorModal: FC<Props> = ({ onSubmit, hide, show }) => {
         biography: "",
     });
 
+    //Submit the new author
     const handleSubmit = () => {
         setNewAuthor({
             lastName: "",
@@ -32,6 +34,7 @@ const CreateAuthorModal: FC<Props> = ({ onSubmit, hide, show }) => {
         <div>
             <Modal show={show} hide={() => hide()}>
                 <div className="grid grid-col-2 gap-4 text-black">
+                    {/* firstname input */}
                     <input
                         value={newAuthor.firstName}
                         onChange={(e) =>
@@ -42,6 +45,7 @@ const CreateAuthorModal: FC<Props> = ({ onSubmit, hide, show }) => {
                         }
                         placeholder="First Name"
                     />
+                    {/* lastname input */}
                     <input
                         value={newAuthor.lastName}
                         onChange={(e) =>
@@ -52,6 +56,7 @@ const CreateAuthorModal: FC<Props> = ({ onSubmit, hide, show }) => {
                         }
                         placeholder="Last Name"
                     />
+                    {/* biography input */}
                     <textarea
                         className="col-span-2 h-20"
                         value={newAuthor.biography}
@@ -63,19 +68,21 @@ const CreateAuthorModal: FC<Props> = ({ onSubmit, hide, show }) => {
                         }
                         placeholder="Biography"
                     />
+                    {/* submit input */}
                     <Button
                         color="bg-blue-500"
                         colorHover="bg-blue-600"
                         onClick={() => handleSubmit()}
                     >
-                        Ajouter
+                        Create author
                     </Button>
+                    {/* cancel input */}
                     <Button
                         color="bg-red-500"
                         colorHover="bg-red-600"
                         onClick={() => hide()}
                     >
-                        Fermer
+                        Cancel
                     </Button>
                 </div>
             </Modal>

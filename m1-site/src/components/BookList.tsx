@@ -7,17 +7,17 @@ type Props = {
     bookList: BookModel[];
 };
 
+//show the list of books in db
 export const BookList: FC<Props> = ({ bookList }) => {
     const router = useRouter();
-    useEffect(() => {
-        console.log("BookList", bookList);
-    }, [bookList]);
 
+    //Redirect to book details page
     const openBookDetails = (bookId: string) => {
         router.push(`/book/${bookId}`);
     };
-
+    
     return bookList.length === 0 ? (
+        //if no books in db
         <div>No books to display</div>
     ) : (
         <ul className="space-y-2">
@@ -38,7 +38,8 @@ export const BookList: FC<Props> = ({ bookList }) => {
                         published in : {book.yearPublished}
                     </span>
                     <br />
-                    <span>Rating : {book.reviews.length != 0 ?  book.reviews.reduce((sum, review) => sum + review.rating, 0) / book.reviews.length : "?"}/5</span>
+                    {/* Calculate the average rating of the book */}
+                    <span>Rating : {book.reviews.length !== 0 ?  book.reviews.reduce((sum, review) => sum + review.rating, 0) / book.reviews.length : "?"}/5</span>
                 </li>
             ))}
         </ul>

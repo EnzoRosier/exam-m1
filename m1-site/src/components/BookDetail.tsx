@@ -9,13 +9,15 @@ import { RemoveModal } from "./modales/RemoveModal";
 import { CreateReviewModel } from "../models/ReviewModel";
 import { Breadcrumbs } from "./Breadcrumbs";
 
+//Show detail of a book
 export const BookDetails = () => {
-    const [showSupprModal, setShowSupprModal] = useState(false);
-    const [book, setBook] = useState<BookModel | null>(null);
-    const [reviewList, setReviewList] = useState([]);
-    const { id } = useParams();
+    const [showSupprModal, setShowSupprModal] = useState(false); //show delete modal
+    const [book, setBook] = useState<BookModel | null>(null); //Current book
+    const [reviewList, setReviewList] = useState([]); //list of reviews
+    const { id } = useParams(); //Current id of books
     const router = useRouter();
 
+    //Fetch book at start
     useEffect(() => {
         axios
             .get(`http://localhost:3001/books/${id}`)
@@ -24,6 +26,7 @@ export const BookDetails = () => {
         fetchReviews();
     }, [id]);
 
+    //Request to fetch reviews
     const fetchReviews = () => {
         axios
             .get(`http://localhost:3001/reviews/${id}`)
@@ -31,6 +34,7 @@ export const BookDetails = () => {
             .catch((err) => console.error(err));
     };
 
+    //Request to delete book
     const onSuppr = () => {
         axios
             .delete(`http://localhost:3001/books/${id}`)
@@ -40,6 +44,7 @@ export const BookDetails = () => {
             .catch((err) => console.error(err));
     };
 
+    //request to add a review
     const onAddReview = (newReview: CreateReviewModel) => {
         axios
             .post(`http://localhost:3001/reviews/${id}`, newReview)
@@ -52,6 +57,7 @@ export const BookDetails = () => {
     return (
         <div>
             {book == null ? (
+                //Waiting for load
                 <Title>Loading...</Title>
             ) : (
                 <>

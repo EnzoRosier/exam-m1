@@ -13,18 +13,20 @@ import { EditAuthorModal } from "./modales/EditAuthorModal";
 import { EditAuthorBook } from "./EditAuthorBooks";
 import { Breadcrumbs } from "./Breadcrumbs";
 
+//Details of an author
 export const AuthorDetails = () => {
-    const [showSupprModal, setShowSupprModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
-    const [author, setAuthor] = useState<AuthorModel | null>(null);
-    const [reviewList, setReviewList] = useState([]);
-    const { id } = useParams();
+    const [showSupprModal, setShowSupprModal] = useState(false); //show delete modal
+    const [showEditModal, setShowEditModal] = useState(false); //Show edit modal
+    const [author, setAuthor] = useState<AuthorModel | null>(null); //Current author
+    const { id } = useParams(); //Get id of author
     const router = useRouter();
 
+    //fetch author info at load
     useEffect(() => {
         fetchAuthor();
     }, []);
 
+    //Request to fetch Author info
     const fetchAuthor = () => {
         axios
             .get(`http://localhost:3001/authors/${id}`)
@@ -32,6 +34,7 @@ export const AuthorDetails = () => {
             .catch((err) => console.error(err));
     };
 
+    //Request to delete the author
     const onSuppr = () => {
         axios
             .delete(`http://localhost:3001/authors/${id}`)
@@ -41,6 +44,7 @@ export const AuthorDetails = () => {
             .catch((err) => console.error(err));
     };
 
+    //Request to update author
     const onChange = (a: AuthorModel) => {
         axios
             .patch(`http://localhost:3001/authors/${id}`, a)
@@ -50,6 +54,7 @@ export const AuthorDetails = () => {
             .catch((err) => console.error(err));
     };
 
+    //request to update books linked to the author
     const onChangeBook = (a: EditBookModel, idBook:string) => {
         axios
             .patch(`http://localhost:3001/books/${idBook}`, a)
@@ -62,6 +67,7 @@ export const AuthorDetails = () => {
     return (
         <div>
             {author == null ? (
+                //Waiting for load
                 <Title>Loading...</Title>
             ) : (
                 <>
@@ -71,6 +77,7 @@ export const AuthorDetails = () => {
                     </Title>
                     <br />
                     <p>Biography : {author.biography}</p>
+                    {/* Calculation average of books review */}
                     <p>
                         {author.books == null ||
                         author.books?.length === 0 ||

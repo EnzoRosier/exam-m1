@@ -6,6 +6,7 @@ type Props = {
     children: string;
 };
 
+//Show a search bar
 export const SearchBar: FC<Props> = ({ onSearch, search, children }) => {
     return (
         <input

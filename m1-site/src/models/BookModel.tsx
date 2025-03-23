@@ -1,6 +1,7 @@
 import { AuthorModel } from "./AuthorModel";
 import { ReviewModel } from "./ReviewModel";
 
+//Model for book
 export type BookModel = {
     id: string;
     title: string;
@@ -10,6 +11,7 @@ export type BookModel = {
     reviews: ReviewModel[];
 };
 
+//Model to Create a book
 export type CreateBookModel = {
     title: string;
     yearPublished: number;
@@ -17,6 +19,7 @@ export type CreateBookModel = {
     price: number;
 };
 
+//Model to update a book
 export type EditBookModel = {
     author: {
         id: string | null

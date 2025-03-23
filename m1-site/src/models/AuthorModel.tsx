@@ -1,5 +1,6 @@
 import { BookModel } from "./BookModel";
 
+//Author Model
 export type AuthorModel = {
     id: string;
     firstName: string;
@@ -8,6 +9,7 @@ export type AuthorModel = {
     books?: BookModel[];
 };
 
+//model to create an author
 export type CreateAuthorModel = {
     firstName: string;
     lastName: string;

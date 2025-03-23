@@ -6,9 +6,9 @@ import Modal from "./Modal";
 import { Button } from "../Button";
 
 type Props = {
-    onSubmit: (newBook: CreateBookModel) => void;
-    hide: () => void;
-    show: boolean;
+    onSubmit: (newBook: CreateBookModel) => void; //Function that add the book to the nb
+    hide: () => void; //Function that hides the modam
+    show: boolean; //variable indicates if modal shown or not
 };
 
 const CreateBookModal: FC<Props> = ({ onSubmit, hide, show }) => {
@@ -20,6 +20,7 @@ const CreateBookModal: FC<Props> = ({ onSubmit, hide, show }) => {
         price: 0,
     });
 
+    //Submit new book to db
     const handleSubmit = () => {
         setNewBook({
             title: "",
@@ -31,12 +32,14 @@ const CreateBookModal: FC<Props> = ({ onSubmit, hide, show }) => {
         onSubmit(newBook);
     };
 
+    //Load all the author
     const loadAuthors = () => {
         axios.get("http://localhost:3001/authors").then((result) => {
             setAuthors(result.data);
         });
     };
 
+    //Load the author at the start
     useEffect(() => {
         loadAuthors();
     }, []);
@@ -44,6 +47,7 @@ const CreateBookModal: FC<Props> = ({ onSubmit, hide, show }) => {
     return (
         <Modal show={show} hide={() => hide()}>
             <div className="grid grid-cols-2 gap-4 text-black">
+                {/* input for title */}
                 <input
                     value={newBook.title}
                     onChange={(e) =>
@@ -54,6 +58,7 @@ const CreateBookModal: FC<Props> = ({ onSubmit, hide, show }) => {
                     }
                     placeholder="Title"
                 />
+                {/* input for year */}
                 <input
                     type="number"
                     onChange={(e) =>
@@ -64,6 +69,7 @@ const CreateBookModal: FC<Props> = ({ onSubmit, hide, show }) => {
                     }
                     placeholder="Year of publication"
                 />
+                {/* input for price */}
                 <input
                     type="number"
                     onChange={(e) =>
@@ -74,6 +80,7 @@ const CreateBookModal: FC<Props> = ({ onSubmit, hide, show }) => {
                     }
                     placeholder="Price"
                 />
+                {/* input for author */}
                 <select
                     value={newBook.authorId}
                     onChange={(e) =>
@@ -90,9 +97,11 @@ const CreateBookModal: FC<Props> = ({ onSubmit, hide, show }) => {
                         </option>
                     ))}
                 </select>
+                {/* confirm input */}
                 <Button color="bg-blue-500" colorHover="bg-blue-600" onClick={() => handleSubmit()}>
                     Confirm
                 </Button>
+                {/* cancel input */}
                 <Button
                     color="bg-red-500"
                     colorHover="bg-red-600"

@@ -3,6 +3,7 @@ import './App.css';
 import GlobalLayout from '../components/GlobalLayout';
 import { Title } from '../components/Title';
 
+//Start page
 function App() {
   return (
   <GlobalLayout> {}

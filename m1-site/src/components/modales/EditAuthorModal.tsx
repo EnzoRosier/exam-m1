@@ -4,10 +4,10 @@ import { AuthorModel } from "../../models/AuthorModel";
 import { Button } from "../Button";
 
 type Props = {
-    show: boolean;
-    hide: () => void;
-    author: AuthorModel;
-    onChange: (a: AuthorModel) => void;
+    show: boolean; //indicates if modal shown or not
+    hide: () => void; //hides the modal
+    author: AuthorModel; //Current author
+    onChange: (a: AuthorModel) => void; //Function that change the author in db
 };
 
 export const EditAuthorModal: FC<Props> = ({
@@ -21,6 +21,7 @@ export const EditAuthorModal: FC<Props> = ({
     return (
         <Modal show={show} hide={hide}>
             <div className="grid grid-col-2 gap-4 text-black">
+                {/* firstname input */}
                 <input
                     value={editedAuthor.firstName}
                     onChange={(e) =>
@@ -31,6 +32,7 @@ export const EditAuthorModal: FC<Props> = ({
                     }
                     placeholder="First Name"
                 />
+                {/* lastname input */}
                 <input
                     value={editedAuthor.lastName}
                     onChange={(e) =>
@@ -41,6 +43,7 @@ export const EditAuthorModal: FC<Props> = ({
                     }
                     placeholder="Last Name"
                 />
+                {/* biography input */}
                 <textarea
                     className="col-span-2 h-20"
                     value={editedAuthor.biography}
@@ -52,15 +55,18 @@ export const EditAuthorModal: FC<Props> = ({
                     }
                     placeholder="Biography"
                 />
+                {/* Confirm input */}
                 <Button
+                    color="bg-green-500"
                     onClick={() => {
                         onChange(editedAuthor);
                         hide();
                     }}
                 >
-                    Change
+                    Confirm
                 </Button>
-                <Button onClick={() => hide()}>Cancel</Button>
+                {/* Cancel input */}
+                <Button color="bg-red-500" onClick={() => hide()}>Cancel</Button>
             </div>
         </Modal>
     );

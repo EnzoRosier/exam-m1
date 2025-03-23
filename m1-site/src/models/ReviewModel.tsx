@@ -1,5 +1,6 @@
 import { BookModel } from "../models/BookModel";
 
+//Model for review
 export type ReviewModel = {
     id: string;
     title: string;
@@ -9,6 +10,7 @@ export type ReviewModel = {
     date: Date;
 }
 
+//Model to create a review
 export type CreateReviewModel = {
     title: string;
     comment: string;

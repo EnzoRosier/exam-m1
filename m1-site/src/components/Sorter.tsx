@@ -2,11 +2,12 @@ import { FC, useState } from "react";
 import { Button } from "./Button";
 
 type Props = {
-    sort: string;
-    sortTypes: string[];
-    setSort: (sort: string) => void;
+    sort: string; //Current sort method
+    sortTypes: string[]; //All sort methods
+    setSort: (sort: string) => void; //Change sort method
 };
 
+//Show a button link to sorts type
 export const Sorter: FC<Props> = ({ sort, setSort, sortTypes }) => {
     const [currSort, setCurrSort] = useState(sort);
 
