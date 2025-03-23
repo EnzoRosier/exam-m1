@@ -39,7 +39,7 @@ export const BookDetails = () => {
         axios
             .delete(`http://localhost:3001/books/${id}`)
             .then((result) => {
-                router.push("/book");
+                router.push("/books");
             })
             .catch((err) => console.error(err));
     };
@@ -62,7 +62,7 @@ export const BookDetails = () => {
             ) : (
                 <>
                     <Breadcrumbs
-                        tree={[{ name: "Book list page", link: "/book" }]}
+                        tree={[{ name: "Book list page", link: "/books" }]}
                         curr={book.title}
                     />
                     <Title>{book.title + " details"}</Title>
@@ -77,7 +77,7 @@ export const BookDetails = () => {
                                     className="underline text-blue-700 cursor-pointer"
                                     onClick={() =>
                                         router.push(
-                                            `/author/${book.author?.id}`
+                                            `/authors/${book.author?.id}`
                                         )
                                     }
                                 >

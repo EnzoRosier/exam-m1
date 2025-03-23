@@ -16,7 +16,7 @@ export class BookEntity extends BaseEntity {
   @Column({ name: 'price', type: 'float', nullable : true })
   price: number;
 
-  @ManyToOne(() => AuthorEntity, {nullable:true})
+  @ManyToOne(() => AuthorEntity, {nullable:true, onDelete: "SET NULL"})
   @JoinColumn({ name : 'author_id'})
   author : AuthorEntity
 

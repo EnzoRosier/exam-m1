@@ -61,7 +61,7 @@ export const EditAuthorBook: FC<Props> = ({ author, onChange }) => {
                         {author.books.map((book) => (
                             <li
                                 className="flex items-center justify-between bg-stone-400 text-black p-1 h-100 cursor-pointer"
-                                onClick={() => router.push(`/book/${book.id}`)}
+                                onClick={() => router.push(`/books/${book.id}`)}
                                 key={book.id}
                             >
                                 {book.title}{" "}

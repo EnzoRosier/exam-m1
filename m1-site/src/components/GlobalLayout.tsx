@@ -16,11 +16,11 @@ export default function GlobalLayout({
     };
 
     const goBookPage = () => {
-        router.push("/book");
+        router.push("/books");
     };
 
     const goAuthorPage = () => {
-        router.push("/author");
+        router.push("/authors");
     };
 
     return (

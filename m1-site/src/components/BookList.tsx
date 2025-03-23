@@ -13,7 +13,7 @@ export const BookList: FC<Props> = ({ bookList }) => {
 
     //Redirect to book details page
     const openBookDetails = (bookId: string) => {
-        router.push(`/book/${bookId}`);
+        router.push(`/books/${bookId}`);
     };
     
     return bookList.length === 0 ? (

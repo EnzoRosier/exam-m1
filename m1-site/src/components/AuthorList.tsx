@@ -17,7 +17,7 @@ export const AuthorList: FC<Props> = ({ authorList }) => {
     ) : (
         <ul className="space-y-2">
             {authorList?.map((author) => (
-                <li className="bg-stone-400 text-black p-3 cursor-pointer" key={author.id} onClick={() => router.push(`author/${author.id}`)}>
+                <li className="bg-stone-400 text-black p-3 cursor-pointer" key={author.id} onClick={() => router.push(`authors/${author.id}`)}>
                     <span className="font-bold text-xl">{author.firstName} {author.lastName}</span>
                     <br />
                     <span>

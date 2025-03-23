@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import GlobalLayout from "../../../src/components/GlobalLayout";
+import GlobalLayout from "../../components/GlobalLayout";
 import { BookList } from "../../components/BookList";
 import CreateBookModal from "../../components/modales/CreateBookModal";
 import { Title } from "../../components/Title";

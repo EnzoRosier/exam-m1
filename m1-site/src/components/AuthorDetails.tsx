@@ -39,7 +39,7 @@ export const AuthorDetails = () => {
         axios
             .delete(`http://localhost:3001/authors/${id}`)
             .then((result) => {
-                router.push("/author");
+                router.push("/authors");
             })
             .catch((err) => console.error(err));
     };
@@ -71,7 +71,7 @@ export const AuthorDetails = () => {
                 <Title>Loading...</Title>
             ) : (
                 <>
-                    <Breadcrumbs tree={[{name:"Author list page", link:"/author"}]} curr={author.firstName + " " + author.lastName} />
+                    <Breadcrumbs tree={[{name:"Author list page", link:"/authors"}]} curr={author.firstName + " " + author.lastName} />
                     <Title>
                         {author.firstName + " " + author.lastName + "'s details"}
                     </Title>
