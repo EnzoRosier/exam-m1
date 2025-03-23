@@ -11,18 +11,15 @@ export class ReviewRepository {
     private readonly bookRepository = this.dataSource.getRepository(BookEntity);
     
     constructor(private readonly dataSource: DataSource) {}
-    
-    async createReview(bookId: string, reviewDto: CreateReviewDto): Promise<ReviewModel> {
+    // création d'une review
+    public async createReview(bookId: string, reviewDto: CreateReviewDto): Promise<ReviewModel> {
         const { title,comment, rating, date } = reviewDto;
-    
-        
         const book = await this.bookRepository.findOne({ where: { id: bookId } });
     
         if (!book) {
           throw new Error('Book not found');
         }
     
-        // Créer un nouvel avis
         const review = this.reviewRepository.create({
           title,
           comment,
@@ -30,12 +27,11 @@ export class ReviewRepository {
           date,
           book,
         });
-    
-        // Sauvegarder
         return this.reviewRepository.save(review);
     }
     
-    async getBookReviews(bookId: string): Promise<ReviewEntity[]> {
+    // liste des reviews d'un livre en paramètre
+    public async getBookReviews(bookId: string): Promise<ReviewEntity[]> {
         return this.reviewRepository.find({
             where: { book: { id: bookId } },
         });
