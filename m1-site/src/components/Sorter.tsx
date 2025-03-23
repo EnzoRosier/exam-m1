@@ -16,5 +16,5 @@ export const Sorter: FC<Props> = ({ sort, setSort, sortTypes }) => {
         setSort(currSort);
     };
 
-    return <Button onClick={() => nextSort()} color="bg-blue-400" colorHover="bg-blue-600">Sorting books : {sort}</Button>;
+    return <Button onClick={() => nextSort()} color="bg-blue-400" colorHover="bg-blue-600">Sorting : {sort}</Button>;
 };

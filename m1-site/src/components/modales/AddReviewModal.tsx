@@ -23,7 +23,7 @@ export const AddReviewModal: FC<Props> = ({
 }) => {
     const [newReview, setNewReview] = useState<CreateReviewModel>({
         title: "",
-        rating: -1,
+        rating: 1,
         comment: "",
         book: book,
         date: new Date(Date.now())
@@ -54,8 +54,8 @@ export const AddReviewModal: FC<Props> = ({
                         placeholder="Review title"
                     />
                     <input
-                        type="range"
-                        min="0"
+                        type="number"
+                        min="1"
                         max="5"
                         value={newReview.rating}
                         onChange={(e) =>

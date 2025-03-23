@@ -28,7 +28,7 @@ export const ReviewList: FC<Props> = ({ reviewList }) => {
                         <br />
                         <span>"{review.comment}"</span>
                         <br />
-                        <span> date : {review.date.toString()}</span>
+                        <span> date : {review.date.toLocaleString("fr-CA").split("T")[0]}</span>
                     </li>
                 ))}
             </ul>

@@ -18,7 +18,7 @@ export class ReviewEntity {
   @Column({ type: 'date' })
   date: Date;
 
-  @ManyToOne(() => BookEntity, (book) => book.reviews, { nullable: false })
+  @ManyToOne(() => BookEntity, (book) => book.reviews, { onDelete: "CASCADE", nullable: false })
   @JoinColumn({ name: 'book_id' })
   book: BookEntity;
 }

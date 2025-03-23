@@ -26,20 +26,20 @@ export const ReviewDrawer: FC<Props> = ({ reviewList, book, onAddReview }) => {
     const sortListReview = (sort: string) => {
         setSort(sort);
         if (sort === "asc") {
-            setReviews([...reviews].sort((a, b) => a.rating - b.rating));
+            setReviews([...reviews].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
         } else {
-            setReviews([...reviews].sort((a, b) => b.rating - a.rating));
+            setReviews([...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
         }
     };
 
     return (
         <div>
-            <button
-                className="bg-stone-800 text-white p-4 rounded-full"
+            <Button
+                color={`fixed bg-stone-800 top-10 right-10`}
                 onClick={() => setShow(!show)}
             >
                 Show Reviews
-            </button>
+            </Button>
             <div
                 className={`fixed bottom-0 right-0 left-0 bg-stone-800 text-white p-4 rounded-lg w-screen h-1/2 transform overflow-y-scroll transition-transform duration-300 ${
                     show ? "translate-y-0" : "translate-y-full"
@@ -50,8 +50,9 @@ export const ReviewDrawer: FC<Props> = ({ reviewList, book, onAddReview }) => {
                     sortTypes={sortTypes}
                     setSort={(s) => sortListReview(s)}
                 ></Sorter>
+                <Button color="bg-green-500 ml-4 mb-4" colorHover="bg-green-600" onClick={() => setShowAdd(true)}>Add Review</Button>
                 <ReviewList reviewList={reviews} />
-                <Button onClick={() => setShowAdd(true)}>Add Review</Button>
+                
                 <AddReviewModal
                     onSubmit={(r) => onAddReview(r)}
                     hide={() => setShowAdd(false)}

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BookModel } from "../models/BookModel";
 import { ReviewDrawer } from "./ReviewDrawer";
-import Modal from "./modales/Modal";
 import { Button } from "./Button";
 import { RemoveModal } from "./modales/RemoveModal";
 import { CreateReviewModel } from "../models/ReviewModel";
@@ -88,7 +87,7 @@ export const BookDetails = () => {
                     <br />
                     <span>Published in : {book.yearPublished}</span>
                     <br />
-                    <span>{book.price}€</span>
+                    <span>Price : {book.price}€</span>
                     <br />
                     <Button
                         onClick={() => setShowSupprModal(true)}
