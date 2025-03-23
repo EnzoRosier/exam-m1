@@ -39,7 +39,7 @@ export const AuthorDetails = () => {
         axios
             .delete(`http://localhost:3001/authors/${id}`)
             .then((result) => {
-                router.push("/authors");
+                router.push("/author");
             })
             .catch((err) => console.error(err));
     };

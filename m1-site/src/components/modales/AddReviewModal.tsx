@@ -32,8 +32,11 @@ export const AddReviewModal: FC<Props> = ({
 
     //Submit new review
     const handleSubmit = () => {
-        hide();
-        onSubmit(newReview);
+        if (newReview.rating > 0 && newReview.rating < 6) {
+            hide();
+            onSubmit(newReview);
+        }
+
     };
 
     return (
@@ -61,11 +64,11 @@ export const AddReviewModal: FC<Props> = ({
                         type="number"
                         min="1"
                         max="5"
-                        value={newReview.rating}
+                        value={newReview.rating || ""}
                         onChange={(e) =>
                             setNewReview((prev) => ({
                                 ...prev,
-                                rating: parseInt(e.target.value),
+                                rating: parseInt(e.target.value, 10),
                             }))
                         }
                     />

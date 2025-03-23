@@ -1,7 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
-import { BookModel, CreateBookModel } from "../../models/BookModel";
-import { AuthorModel } from "../../models/AuthorModel";
-import axios from "axios";
+import React, { FC } from "react";
 
 type Props = {
     children: React.ReactNode; //inside of modal
