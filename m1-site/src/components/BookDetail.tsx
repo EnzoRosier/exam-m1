@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BookModel } from "../models/BookModel";
 import { ReviewDrawer } from "./ReviewDrawer";
-import Modal from "./modales/Modal";
 import { Button } from "./Button";
 import { RemoveModal } from "./modales/RemoveModal";
 import { CreateReviewModel } from "../models/ReviewModel";
+import { Breadcrumbs } from "./Breadcrumbs";
 
 export const BookDetails = () => {
     const [showSupprModal, setShowSupprModal] = useState(false);
@@ -55,6 +55,10 @@ export const BookDetails = () => {
                 <Title>Loading...</Title>
             ) : (
                 <>
+                    <Breadcrumbs
+                        tree={[{ name: "Book list page", link: "/book" }]}
+                        curr={book.title}
+                    />
                     <Title>{book.title + " details"}</Title>
                     <br />
                     <span>
@@ -66,7 +70,9 @@ export const BookDetails = () => {
                                 <span
                                     className="underline text-blue-700 cursor-pointer"
                                     onClick={() =>
-                                        router.push(`/author/${book.author.id}`)
+                                        router.push(
+                                            `/author/${book.author?.id}`
+                                        )
                                     }
                                 >
                                     {book.author == null
@@ -81,7 +87,7 @@ export const BookDetails = () => {
                     <br />
                     <span>Published in : {book.yearPublished}</span>
                     <br />
-                    <span>{book.price}€</span>
+                    <span>Price : {book.price}€</span>
                     <br />
                     <Button
                         onClick={() => setShowSupprModal(true)}

@@ -20,6 +20,6 @@ export class BookEntity extends BaseEntity {
   @JoinColumn({ name : 'author_id'})
   author : AuthorEntity
 
-  @OneToMany(() => ReviewEntity, (review) => review.book)
+  @OneToMany(() => ReviewEntity, (review) => review.book, {nullable:true})
   reviews: ReviewEntity[];
 }

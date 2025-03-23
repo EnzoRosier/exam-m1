@@ -24,7 +24,7 @@ export default function GlobalLayout({
 
     return (
         <div className="grid grid-cols-6 bg-stone-500 text-white">
-            <div className="col-span-1 flex flex-col bg-stone-900 h-screen">
+            <div className="sticky top-0 col-span-1 flex flex-col bg-stone-900 h-screen">
                 <NavButton onClick={goHomePage}>Home Page</NavButton>
                 <NavButton onClick={goBookPage}>Book List</NavButton>
                 <NavButton onClick={goAuthorPage}>Author List</NavButton>
